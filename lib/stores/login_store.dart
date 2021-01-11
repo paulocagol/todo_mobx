@@ -25,4 +25,30 @@ abstract class _LoginStore with Store {
 
   @computed
   bool get isFormValid => isEmailValid && isPasswordValid;
+
+  @observable
+  bool passwordVisible = false;
+
+  @action
+  void togglePasswordVisibility() => passwordVisible = !passwordVisible;
+
+  @observable
+  bool loading = false;
+
+  @action
+  Future<void> login() async {
+    loading = true;
+
+    await Future.delayed(Duration(seconds: 2));
+
+    loading = false;
+    loggedIn = true;
+  }
+
+  @computed
+  Function get loginPressed =>
+      (isEmailValid && isPasswordValid && !loading) ? login : null;
+
+  @observable
+  bool loggedIn = false;
 }
