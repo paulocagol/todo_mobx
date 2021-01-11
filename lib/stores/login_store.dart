@@ -51,4 +51,12 @@ abstract class _LoginStore with Store {
 
   @observable
   bool loggedIn = false;
+
+  @action
+  void logOut() {
+    loggedIn = false;
+
+    email = '';
+    password = '';
+  }
 }
